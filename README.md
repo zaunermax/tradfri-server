@@ -30,3 +30,8 @@ coap-client -m post -u "Client_identity" -k "SECURITY_CODE" -e '{"9090":"IDENTIT
 # SECURITY_CODE = the security code under the gateway
 # IDENTITY      = your api user
 ```
+
+#### Important note
+
+When deploying the project on production, the `FLASK_ENV` env variable must be set to `production` to configure the 
+host to `0.0.0.0`. That way, the server binds itself to the ip of the host machine.

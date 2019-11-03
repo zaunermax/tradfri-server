@@ -2,6 +2,7 @@ from flask import Flask, request, Response, json
 from pytradfri import Gateway
 from pytradfri.api.libcoap_api import APIFactory
 from pytradfri.util import load_json
+from os import environ
 
 app = Flask(__name__)
 
@@ -66,4 +67,5 @@ def get_blind_status():
 
 
 if __name__ == '__main__':
-    app.run()
+    host = '0.0.0.0' if environ.get('FLASK_ENV') == 'production' else '127.0.0.1'
+    app.run(host=host, port=5000)

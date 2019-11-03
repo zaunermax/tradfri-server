@@ -15,11 +15,6 @@ host = config["host"]
 api_factory = APIFactory(host=host, psk_id=psk_id, psk=psk)
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
-
 @app.route('/blinds', methods=['PUT'])
 def handle_blinds():
     action = request.args.get('action')

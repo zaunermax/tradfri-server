@@ -4,7 +4,7 @@ This is a small project which aims to make controlling my Fyrtur blinds as easy 
 
 ## Installation
 
-To install the necessary dependencies, go over to [this](https://github.com/ggravlingen/pytradfri) project and follow the installation instructions there.
+To install the necessary dependencies, execute the script in the `scripts` folder.
 
 Then you just need to install the lib via: `pip3 install pytradfri`.
 

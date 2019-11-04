@@ -1,2 +1,2 @@
-*.conf
 .idea
+docker-compose.yml

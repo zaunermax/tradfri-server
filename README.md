@@ -10,16 +10,14 @@ Then you just need to install the lib via: `pip3 install pytradfri`.
 
 ## Config
 
-You need a config file in the root of your project: `tradfri.conf`
+You need to pass the config via environment variables:
 
 The config must be in this form:
 
 ```
-{
-    "identity": "<identity>",
-    "key": "<pre-shared-key>",
-    "host": "<gateway-ip>"
-}
+TRADFRI_ID = <key-identity>
+TRADFRI_PSK = <pre-shared-key>
+TRADFRI_IP = <bridge-ip>
 ```
 
 You also need to create an api user on your gateway. After you installed all dependencies from the `pytradfri` package, 

@@ -6,12 +6,9 @@ from os import environ
 
 app = Flask(__name__)
 
-CONFIG_FILE = 'tradfri.conf'
-
-config = load_json(CONFIG_FILE)
-psk_id = config["identity"]
-psk = config["key"]
-host = config["host"]
+psk_id = environ['TRADFRI_ID']
+psk = environ['TRADFRI_PSK']
+host = environ['TRADFRI_IP']
 
 api_factory = APIFactory(host=host, psk_id=psk_id, psk=psk)
 

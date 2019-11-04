@@ -1,7 +1,8 @@
 version: '3'
 services:
   tradfri:
-    image: maxincredible52/tradfri-server:latest
+    build: .
+    image: mxmlnznr/tradfri-server:latest
     ports:
       - 5000:5000
     restart: always

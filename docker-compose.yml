@@ -1,0 +1,11 @@
+version: '3'
+services:
+  tradfri:
+    image: maxincredible52/tradfri-server:latest
+    ports:
+      - 5000:5000
+    environment:
+      FLASK_ENV: production
+      TRADFRI_ID: ${TRADFRI_ID}
+      TRADFRI_PSK: ${TRADFRI_PSK}
+      TRADFRI_IP: ${TRADFRI_IP}

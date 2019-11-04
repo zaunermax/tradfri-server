@@ -16,15 +16,19 @@ host = config["host"]
 api_factory = APIFactory(host=host, psk_id=psk_id, psk=psk)
 
 
+def safeParseInt(string):
+    try:
+        return int(string)
+    except ValueError:
+        return None
+
+
 @app.route('/blinds', methods=['PUT'])
 def handle_blinds():
-    action = request.args.get('action')
+    state = safeParseInt(request.args.get('state'))
 
-    if action is None:
-        return Response(response='Error, no action defined.', status=400)
-
-    if action != 'open' and action != 'close':
-        return Response(response='Error, wrong action: [' + action + ']', status=400)
+    if state is None or state < 0 or state > 100:
+        return Response(response='Error, no or wrong state defined.', status=400)
 
     api = api_factory.request
     gateway = Gateway()
@@ -34,10 +38,6 @@ def handle_blinds():
     devices = api(devices_commands)
 
     blinds = [dev for dev in devices if dev.has_blind_control]
-    state = 0
-
-    if action == 'close':
-        state = 100
 
     for blind in blinds:
         api(blind.blind_control.set_state(state))

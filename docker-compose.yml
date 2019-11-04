@@ -4,6 +4,7 @@ services:
     image: maxincredible52/tradfri-server:latest
     ports:
       - 5000:5000
+    restart: always
     environment:
       FLASK_ENV: production
       TRADFRI_ID: ${TRADFRI_ID}

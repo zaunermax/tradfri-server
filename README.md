@@ -10,7 +10,8 @@ Then you just need to install the lib via: `pip3 install pytradfri`.
 
 ## Config
 
-You need to pass the config via environment variables:
+You need to pass the config via environment variables (the easiest way is by adding a .env file in the root of the 
+project):
 
 The config must be in this form:
 

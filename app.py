@@ -1,16 +1,12 @@
 from flask import Flask, request, Response, json
 from pytradfri import Gateway
 from pytradfri.api.libcoap_api import APIFactory
-from pytradfri.util import load_json
-from os import environ
+from dotenv import load_dotenv
+from os import getenv, environ
 
-app = Flask(__name__)
 
-psk_id = environ['TRADFRI_ID']
-psk = environ['TRADFRI_PSK']
-host = environ['TRADFRI_IP']
-
-api_factory = APIFactory(host=host, psk_id=psk_id, psk=psk)
+def safeGetEnv(key):
+    return environ.get(key) if environ.get(key) is not None else getenv(key)
 
 
 def safeParseInt(string):
@@ -18,6 +14,17 @@ def safeParseInt(string):
         return int(string)
     except ValueError:
         return None
+
+
+load_dotenv()
+
+app = Flask(__name__)
+
+psk_id = safeGetEnv('TRADFRI_ID')
+psk = safeGetEnv('TRADFRI_PSK')
+host = safeGetEnv('TRADFRI_IP')
+
+api_factory = APIFactory(host=host, psk_id=psk_id, psk=psk)
 
 
 @app.route('/blinds', methods=['PUT'])
@@ -64,5 +71,5 @@ def get_blind_status():
 
 
 if __name__ == '__main__':
-    host = '0.0.0.0' if environ.get('FLASK_ENV') == 'production' else '127.0.0.1'
+    host = '0.0.0.0' if safeGetEnv('FLASK_ENV') == 'production' else '127.0.0.1'
     app.run(host=host, port=5000)
